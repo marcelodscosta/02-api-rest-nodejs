@@ -4,12 +4,9 @@ import { transactionsRoutes } from './routes/transactions'
 
 const app = fastify()
 
-app.register(transactionsRoutes)
-
-// app.get('/hello', async () => {
-//   const transactions = await knex('transactions').select('*')
-//   return transactions
-// })
+app.register(transactionsRoutes, {
+  prefix: '/transactions',
+})
 
 app
   .listen({
