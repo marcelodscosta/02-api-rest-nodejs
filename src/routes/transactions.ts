@@ -5,6 +5,9 @@ import { knex } from '../database'
 import { checkSessionIdExist } from '../middlewares/check-session-id-exist'
 
 export const transactionsRoutes = async (app: FastifyInstance) => {
+  app.addHook('preHandler', async (request) => {
+    console.log(`[${request.method}] ${request.url}`)
+  })
   app.get('/', { preHandler: [checkSessionIdExist] }, async (request) => {
     const { sessionId } = request.cookies
     const transactions = await knex('transactions')
